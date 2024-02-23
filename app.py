@@ -15,6 +15,7 @@ from langchain.llms import OpenAI
 from langchain.chat_models import ChatOpenAI
 import json
 from analyze import *
+from generate import *
 app = Flask(__name__)
 CORS(app)
 
@@ -80,7 +81,7 @@ def handle_text_to_speech():
     response = send_file(output_file_path, as_attachment=True)
     response.headers["Content-Disposition"] = "attachment; filename={}".format(audio_filename)
     return response
-'''
+
 @app.route('/transcribe', methods=['POST'])
 def upload_audio():
     try:
@@ -112,25 +113,15 @@ def upload_audio():
 
     except Exception as e:
         # Handle exceptions
-        return jsonify({"error": str(e)}), 500'''
+        return jsonify({"error": str(e)}), 500
 
     
-'''@app.route('/generateques',methods=['GET'])
+@app.route('/generateques',methods=['GET'])
 def generatequestions():
     diff = request.args.get('difficulty')
-    if diff == 'novice':
-        filename = 'openai/novice.txt'
-    elif diff == 'medium':
-        filename = 'openai/medium.txt'
-    elif diff == 'hard':
-        filename = 'openai/hard.txt'
-    os.environ["OPENAI_API_KEY"] = "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"
-    query = "Generate a question"
-    loader = TextLoader(filename)
-    index = VectorstoreIndexCreator().from_loaders([loader])
-    llm = ChatOpenAI(api_key=os.environ["OPENAI_API_KEY"])
-    results = index.query(query, llm=llm)
-    return jsonify({"question": results}), 200'''
+    resp = (generatequest(diff))
+    
+    return resp, 200
 @app.route('/analyze',methods=['GET'])
 def analyze():
     question = request.args.get('question')

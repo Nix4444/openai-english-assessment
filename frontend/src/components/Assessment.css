@@ -1,0 +1,69 @@
+.assessment-container {
+    margin-top: 20px; /* Adjust based on your navbar's height */
+    padding: 20px;
+    animation: fadeIn 1s ease-out;
+}
+
+.welcome-section h1 {
+    font-size: 2.5em;
+    color: #333;
+    animation: slideIn 1s ease-out;
+}
+
+.welcome-section p {
+    font-size: 1.2em;
+    color: #666;
+    animation: slideIn 1.5s ease-out;
+}
+
+.features-section h2 {
+    margin-top: 20px;
+    color: #444;
+}
+
+.features-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.features-section li {
+    margin-bottom: 10px;
+    font-size: 1em;
+    color: #555;
+    animation: slideIn 2s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.assessment-container {
+    margin-top: 20px;
+    padding: 20px;
+    text-align: center; /* Centering the content */
+}
+
+.logo-container {
+    margin-bottom: 20px;
+}
+
+.logo {
+    width: 150px; /* Adjust based on your logo's size */
+    animation: pulseWave 2s infinite ease-in-out;
+}
+
+@keyframes pulseWave {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(128, 0, 128, 0.7), 0 0 0 10px rgba(128, 0, 128, 0), 0 0 0 20px rgba(128, 0, 128, 0);
+    }
+    50% {
+        box-shadow: 0 0 0 5px rgba(128, 0, 128, 0.5), 0 0 0 15px rgba(128, 0, 128, 0.3), 0 0 0 25px rgba(128, 0, 128, 0.1);
+    }
+}
+
