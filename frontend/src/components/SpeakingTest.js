@@ -47,13 +47,13 @@ const SpeakingTest = () => {
       if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         mediaRecorderRef.current = new MediaRecorder(stream);
+        audioChunksRef.current = []; // Ensure to clear previous recordings
         mediaRecorderRef.current.ondataavailable = (event) => {
           audioChunksRef.current.push(event.data);
         };
         mediaRecorderRef.current.onstop = async () => {
           setIsLoading(true); // Indicate processing
           const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
-          audioChunksRef.current = [];
           await sendAudioToServer(audioBlob);
           setIsLoading(false); // Processing done
         };
@@ -121,6 +121,17 @@ const SpeakingTest = () => {
       )}
 
       <div className="controls-container">
+        <div className="difficulty-selector">
+          <button className="btn btn-secondary dropdown-toggle" type="button">
+            {difficulty}
+          </button>
+          <ul className="dropdown-menu">
+            <li><button className="dropdown-item" onClick={() => handleDifficultyChange('easy')}>Easy</button></li>
+            <li><button className="dropdown-item" onClick={() => handleDifficultyChange('medium')}>Medium</button></li>
+            <li><button className="dropdown-item" onClick={() => handleDifficultyChange('hard')}>Hard</button></li>
+          </ul>
+        </div>
+
         <button type="button" className="btn btn-primary" onClick={startTest} disabled={isLoading}>
           {isLoading ? 'Loading...' : 'Start Test'}
         </button>
@@ -128,7 +139,7 @@ const SpeakingTest = () => {
         {question && (
           <>
             <button className="btn btn-secondary" onClick={() => setResponseMode('type')}>Type Response</button>
-            <button className="btn btn-info" onClick={startRecording} disabled={isRecording}>
+            <button className="btn btn-info" onClick={startRecording} disabled={isLoading || (isRecording && responseMode === 'speak')}>
               {isRecording ? 'Stop Recording' : 'Speak Response'}
             </button>
           </>
