@@ -1,5 +1,4 @@
 import React from 'react';
-//import { useHistory } from 'react-router-dom';
 
 
 const AnimatedGrid = () => {
@@ -28,13 +27,13 @@ const AnimatedGrid = () => {
     };
 
     const headingStyle = {
-        fontSize: '4rem', // Increased font size for headings
-        margin: '0 0 20px 0', // Added margin for spacing
+        fontSize: '4rem', 
+        margin: '0 0 20px 0', 
     };
 
     const paragraphStyle = {
-        fontSize: '1.6rem', // Increased font size for paragraphs
-        margin: '0 0 10px 0', // Added margin for spacing
+        fontSize: '1.6rem', 
+        margin: '0 0 10px 0',
     };
 
     return (

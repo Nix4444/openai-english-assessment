@@ -1,16 +1,17 @@
 import React, { useState, useRef } from 'react';
-import './SpeakingTest.css'; // Ensure this path is correct
-import logo from './logo.png'; // Ensure this path is correct
-import loadingAnimation from './loading.gif'; // Ensure this path is correct
+import './SpeakingTest.css'; 
+import logo from './logo.png'; 
+import loadingAnimation from './loading.gif'; 
 
 const SpeakingTest = () => {
-  const [difficulty, setDifficulty] = useState('Easy');
+  const [difficulty, setDifficulty] = useState('Medium');
   const [isLoading, setIsLoading] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
   const [question, setQuestion] = useState('');
-  const [userInput, setUserInput] = useState(''); // For typed responses
+  const [userInput, setUserInput] = useState(''); 
+  const [transcribedAnswer, setTranscribedAnswer] = useState(''); 
   const [analysisResult, setAnalysisResult] = useState(null);
-  const [responseMode, setResponseMode] = useState(null); // 'type' or 'speak'
+  const [responseMode, setResponseMode] = useState(null);
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
 
@@ -21,6 +22,7 @@ const SpeakingTest = () => {
   const startTest = async () => {
     setIsLoading(true);
     setUserInput('');
+    setTranscribedAnswer('');
     setAnalysisResult(null);
     setResponseMode(null);
 
@@ -47,15 +49,15 @@ const SpeakingTest = () => {
       if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         mediaRecorderRef.current = new MediaRecorder(stream);
-        audioChunksRef.current = []; // Ensure to clear previous recordings
+        audioChunksRef.current = [];
         mediaRecorderRef.current.ondataavailable = (event) => {
           audioChunksRef.current.push(event.data);
         };
         mediaRecorderRef.current.onstop = async () => {
-          setIsLoading(true); // Indicate processing
+          setIsLoading(true);
           const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
           await sendAudioToServer(audioBlob);
-          setIsLoading(false); // Processing done
+          setIsLoading(false);
         };
         mediaRecorderRef.current.start();
         setIsRecording(true);
@@ -75,6 +77,7 @@ const SpeakingTest = () => {
       });
       if (response.ok) {
         const data = await response.json();
+        setTranscribedAnswer(data.transcript);
         await analyzeAnswer(question, data.transcript);
       } else {
         console.error("Transcription API call failed:", response.status);
@@ -85,20 +88,20 @@ const SpeakingTest = () => {
   };
 
   const analyzeAnswer = async (question, answer) => {
-    setIsLoading(true); // Indicate processing
+    setIsLoading(true);
     const apiUrl = `http://127.0.0.1:5000/analyze?question=${encodeURIComponent(question)}&answer=${encodeURIComponent(answer)}`;
     try {
       const response = await fetch(apiUrl);
       if (response.ok) {
         const data = await response.json();
-        setAnalysisResult(JSON.stringify(data, null, 2)); // Store the formatted JSON response
+        setAnalysisResult(JSON.stringify(data, null, 2));
       } else {
         console.error("Analysis API call failed:", response.status);
       }
     } catch (error) {
       console.error("Error analyzing answer:", error);
     }
-    setIsLoading(false); // Processing done
+    setIsLoading(false);
   };
 
   const handleUserInput = (e) => {
@@ -112,7 +115,7 @@ const SpeakingTest = () => {
   return (
     <div className="test-container">
       <img src={logo} alt="WordWave Logo" className="logo" />
-      <h1 className="animated-heading">Speaking Test</h1>
+      <h1 className="animated-heading">English Assessment with NLP</h1>
 
       {(isLoading) && (
         <div className="loading-container">
@@ -158,7 +161,19 @@ const SpeakingTest = () => {
       )}
 
       {responseMode === 'type' && (
-        <textarea value={userInput} onChange={handleUserInput} className="typed-response-textarea"></textarea>
+        <textarea
+        value={userInput}
+        onChange={handleUserInput}
+        className="typed-response-textarea"
+        style={{ width: '100%', height: '200px', resize: 'vertical', padding: '10px' }}
+      ></textarea>
+      )}
+
+      {!isLoading && transcribedAnswer && (
+        <div className="transcribed-answer-container">
+          <h2>Answer:</h2>
+          <p>{transcribedAnswer}</p>
+        </div>
       )}
 
       {!isLoading && analysisResult && (

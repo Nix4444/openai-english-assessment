@@ -1,0 +1,7 @@
+Flask
+flask-cors
+google-cloud-speech
+google-auth
+google-cloud-texttospeech
+openai==1.12.0
+requests

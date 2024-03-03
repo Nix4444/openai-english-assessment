@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useState } from 'react';
-import * as tf from '@tensorflow/tfjs';
 import '@tensorflow/tfjs';
 import * as blazeface from '@tensorflow-models/blazeface';
 
@@ -38,7 +37,6 @@ const FaceDetectionComponent = () => {
 
         const checkInterval = setInterval(async () => {
           if (!blazefaceModel) {
-            // Model has been disposed, stop checking
             clearInterval(checkInterval);
             return;
           }

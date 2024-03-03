@@ -1,5 +1,5 @@
 .assessment-container {
-    margin-top: 20px; /* Adjust based on your navbar's height */
+    margin-top: 20px;
     padding: 20px;
     animation: fadeIn 1s ease-out;
 }
@@ -46,7 +46,7 @@
 .assessment-container {
     margin-top: 20px;
     padding: 20px;
-    text-align: center; /* Centering the content */
+    text-align: center;
 }
 
 .logo-container {
@@ -54,7 +54,7 @@
 }
 
 .logo {
-    width: 150px; /* Adjust based on your logo's size */
+    width: 150px;
     animation: pulseWave 2s infinite ease-in-out;
 }
 

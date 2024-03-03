@@ -1,4 +1,4 @@
-/* Adjusting the rise and fall animation */
+
 @keyframes riseFall {
   0%, 100% {
     transform: translateY(0);
@@ -16,7 +16,7 @@
   display: flex;
   justify-content: center;
   color: #ffffff;
-  font-size: 5rem;
+  font-size: 3rem;
   margin: 20px 0 30px; /* Updated margin for spacing */
   animation: riseFall 3s infinite alternate;
 }
@@ -38,12 +38,12 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Aligning buttons in a single row */
+
 .controls-container {
   display: flex;
-  justify-content: center; /* Center buttons horizontally */
-  align-items: center; /* Align buttons vertically */
-  gap: 10px; /* Spacing between buttons */
+  justify-content: center; 
+  align-items: center; 
+  gap: 10px; 
 }
 
 .btn, .dropdown, .btn-primary {
@@ -98,59 +98,73 @@
   display: block;
 }
 
-/* Container for the difficulty selector and buttons */
+
 .controls-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px; /* Adjust the space between the elements as needed */
+  gap: 10px; 
 }
 
-/* Ensuring the dropdown's parent container is positioned relatively */
+
 .difficulty-selector {
-  position: relative; /* This is crucial for absolute positioning of the dropdown */
+  position: relative; 
 }
 
-/* Styling for the button that triggers the dropdown */
+
 .dropdown-toggle {
   cursor: pointer;
-  background-color: #6c757d; /* Example background color */
-  color: white; /* Text color */
-  padding: 10px 20px; /* Padding inside the button */
-  border-radius: 5px; /* Rounded corners for the button */
-  border: none; /* Removing the border */
+  background-color: #6c757d; 
+  color: white; 
+  padding: 10px 20px; 
+  border-radius: 5px;
+  border: none; 
 }
 
-/* Hiding the dropdown menu by default */
+
 .dropdown-menu {
   display: none;
   position: absolute;
-  top: 100%; /* Positioned right below the dropdown-toggle button */
+  top: 100%; 
   left: 0;
-  background-color: #f9f9f9; /* Background color of the dropdown items */
-  min-width: 160px; /* Minimum width of the dropdown */
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); /* Adding some shadow for depth */
-  z-index: 1; /* Ensuring it's above other content */
+  background-color: #f9f9f9; 
+  min-width: 160px; 
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1; 
 }
 
-/* Styling for individual dropdown items */
+
 .dropdown-menu .dropdown-item {
-  color: black; /* Text color for dropdown items */
-  padding: 12px 16px; /* Padding inside each dropdown item */
-  text-decoration: none; /* Removing underline from links */
-  display: block; /* Making each item a block for better click area */
+  color: black; 
+  padding: 12px 16px; 
+  text-decoration: none;
+  display: block;
 }
 
-/* Changing the background color of dropdown items on hover */
+
 .dropdown-menu .dropdown-item:hover {
-  background-color: #f1f1f1; /* Light grey background on hover */
+  background-color: #f1f1f1;
 }
 
-/* Displaying the dropdown menu when hovering over the difficulty-selector */
+
 .difficulty-selector:hover .dropdown-menu {
   display: block;
 }
 .loading-gif {
-  width: 50px; /* Adjust the size as needed */
+  width: 50px; 
   height: auto;
 }
+.typed-response-textarea {
+  width: 50%; 
+  height: 200px; 
+  resize: vertical; 
+  padding: 10px; 
+  border-radius: 5px;
+  border: 1px solid #020000;
+  font-size: 16px;
+  box-sizing: border-box; 
+  margin: 0 auto; 
+  display: block;
+  background-color: black;
+  color: white;
+  }
